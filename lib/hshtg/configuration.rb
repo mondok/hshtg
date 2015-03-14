@@ -28,7 +28,7 @@ module Hshtg
 			end
 
 			def tag_time_to_live_in_seconds=(value)
-				@tag_time_to_live_in_seconds = value.to_i
+				@tag_time_to_live_in_seconds = value
 			end
 
 			def hashtag_storage_class

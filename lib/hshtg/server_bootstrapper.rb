@@ -71,7 +71,7 @@ module Hshtg
 
       # Get configuration options from arguments
       def update_config_options
-        options = OptsParser.options
+        options = OptsParser.options(ARGV)
         Hshtg::Configuration.tag_time_to_live_in_seconds = options[:ttl]
         Hshtg::Configuration.case_sensitive_matching = options[:case]
         Hshtg::Configuration.hashtag_storage_class = options[:storage]
