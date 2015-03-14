@@ -10,3 +10,12 @@ if File.exist?('.env')
     eval "ENV['#{a[0]}']='#{a[1] || ''}'"
   end
 end
+
+
+if __FILE__== $0
+  if Hshtg::Configuration.is_valid?
+    Hshtg::ServerBootstrapper.start
+  else
+    puts 'Please ensure all environment variables are set.'
+  end
+end
