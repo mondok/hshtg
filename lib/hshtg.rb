@@ -1,3 +1,4 @@
+require_relative 'hshtg/utils'
 require_relative 'hshtg/configuration'
 require_relative 'hshtg/models/hashtag_result'
 require_relative 'hshtg/models/hashtag'
