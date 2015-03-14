@@ -20,6 +20,19 @@ module Hshtg
             options[:case] = val != 0
           end
 
+          # Optionally use Redis as a cache store
+          opts.on('-s', '--store [in-memory]', 'type of backend storage for storing hashtags (in-memory or redis)') do |storage|
+            if storage.downcase == 'redis'
+              if Hshtg::Utils.redis_available?
+                options[:storage] = Hshtg::Storage::RedisStore
+              else
+                puts 'Redis is not available because the gem is not installed'
+                puts opts
+                exit
+              end
+            end
+          end
+
           # Instead of every 60 seconds, use a custom set time
           opts.on('-t', '--ttl [60]', 'tags time to live before they are not counted') do |t|
             if t.to_i == 0

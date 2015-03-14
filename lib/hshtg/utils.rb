@@ -2,7 +2,15 @@
 module Hshtg
   class Utils
     class << self
-      # load any environment variables from disk
+      # Check if Redis is available to use as a cache
+      def redis_available?
+        gem 'redis'
+        true
+      rescue Gem::LoadError
+        false
+      end
+
+      # Load any environment variables from disk
       def load_env_vars
         exists = File.exist?('.env')
         return false unless exists

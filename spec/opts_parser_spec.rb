@@ -28,6 +28,11 @@ RSpec.describe Hshtg::OptsParser, '#opts_parser', focus: true do
       expect(options[:port]).to eq(1)
     end
 
+    it 'can change the storage to in-memory' do
+      options = Hshtg::OptsParser.options(['--store', 'in-memory'])
+      expect(options[:storage]).to eq(Hshtg::Storage::InMemoryStore)
+    end
+
   end
 
 end
