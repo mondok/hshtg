@@ -16,10 +16,10 @@ module Hshtg
         # make sure all the keys are set
         validate_keys
 
-        options = update_config_options
+        options     = update_config_options
 
         # create a new server
-        @server = WEBrick::HTTPServer.new(Port: options[:port])
+        @server     = WEBrick::HTTPServer.new(Port: options[:port])
 
         # start singleton stream controller
         @controller = Hshtg::StreamController.instance.start
@@ -71,11 +71,11 @@ module Hshtg
 
       # Get configuration options from arguments
       def update_config_options
-        options = OptsParser.options(ARGV)
+        options                                          = OptsParser.options(ARGV)
         Hshtg::Configuration.tag_time_to_live_in_seconds = options[:ttl]
-        Hshtg::Configuration.case_sensitive_matching = options[:case]
-        Hshtg::Configuration.hashtag_storage_class = options[:storage]
-        current_config = Hshtg::Configuration.to_a
+        Hshtg::Configuration.case_sensitive_matching     = options[:case]
+        Hshtg::Configuration.hashtag_storage_class       = options[:storage]
+        current_config                                   = Hshtg::Configuration.to_a
         current_config << "Port: #{options[:port]}"
         logger.info(current_config.join(', '))
         options

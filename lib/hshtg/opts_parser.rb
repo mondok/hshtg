@@ -7,7 +7,7 @@ module Hshtg
       def options(args)
         # handle the port options and help
         options = { port: 3000, case: false, ttl: 60, storage: Hshtg::Storage::InMemoryStore }
-        parser = OptionParser.new do |opts|
+        parser  = OptionParser.new do |opts|
           opts.banner = 'Usage: hshtg.rb [options]'
           # Check if case sensitivity should be set for grouping hash tags
           opts.on('-c', '--case [0]', 'case sensitivity (0 or 1), 1 for sensitive which means tags will be grouped separately if they are cased differently') do |c|
@@ -17,7 +17,7 @@ module Hshtg
               puts opts
               exit
             end
-            options[:case] = val != 0 
+            options[:case] = val != 0
           end
 
           # Instead of every 60 seconds, use a custom set time

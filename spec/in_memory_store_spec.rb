@@ -13,16 +13,16 @@ RSpec.describe Hshtg::Storage, '#memory_store', focus: true do
     end
 
     it 'can get fresh hashtags' do
-      store = Hshtg::Storage::InMemoryStore.new
-      list = hashtag_list
+      store             = Hshtg::Storage::InMemoryStore.new
+      list              = hashtag_list
       list[0].timestamp = Time.now - 100
       store.add_tags(list)
       expect(store.fresh_tags.count).to eq(list.count-1)
     end
 
     it 'can evict stale hashtags' do
-      store = Hshtg::Storage::InMemoryStore.new
-      list = hashtag_list
+      store             = Hshtg::Storage::InMemoryStore.new
+      list              = hashtag_list
       list[0].timestamp = Time.now - 100
       store.add_tags(list)
       store.evict_old_tags
@@ -30,16 +30,16 @@ RSpec.describe Hshtg::Storage, '#memory_store', focus: true do
     end
 
     it 'can get fresh hashtags with custom time' do
-      store = Hshtg::Storage::InMemoryStore.new
-      list = hashtag_list
+      store             = Hshtg::Storage::InMemoryStore.new
+      list              = hashtag_list
       list[0].timestamp = Time.now - 100
       store.add_tags(list)
       expect(store.fresh_tags(120).count).to eq(list.count)
     end
 
     it 'can evict stale hashtags with custom time' do
-      store = Hshtg::Storage::InMemoryStore.new
-      list = hashtag_list
+      store             = Hshtg::Storage::InMemoryStore.new
+      list              = hashtag_list
       list[0].timestamp = Time.now - 100
       store.add_tags(list)
       store.evict_old_tags(10)

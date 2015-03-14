@@ -8,7 +8,7 @@ module Hshtg
     include Hshtg::HshtgLogger
 
     def do_GET (request, response)
-      @request = request
+      @request  = request
       @response = response
       logger.info("GET #{@request.path} hit")
 
@@ -31,11 +31,11 @@ module Hshtg
 
     # Handle HEAD requests for health checks
     def do_HEAD (request, response)
-      @request = request
+      @request  = request
       @response = response
 
       logger.info("HEAD #{@request.path} hit")
-      controller = Hshtg::StreamController.instance
+      controller                 = Hshtg::StreamController.instance
       @response.header['Status'] = controller.nil? ? 'down' : 'up'
     end
 
@@ -46,7 +46,7 @@ module Hshtg
       controller = Hshtg::StreamController.instance
       if controller
         config_vals = Hshtg::Configuration.to_a.join("\n")
-        body = "status: up\nstarted_at: #{controller.started_at}\n#{config_vals}"
+        body        = "status: up\nstarted_at: #{controller.started_at}\n#{config_vals}"
       else
         body = 'status: down'
       end
@@ -57,24 +57,24 @@ module Hshtg
     # This is if the query comes through successfully
     def handle_top_request
       size = strip_for_top
-      return generic_response({code: 500, message: 'Invalid request'}) unless size
+      return generic_response({ code: 500, message: 'Invalid request' }) unless size
       controller = Hshtg::StreamController.instance
-      tags = controller.top_n(size)
+      tags       = controller.top_n(size)
       generic_response(code: 200, message: JSON.generate(tags), content_type: 'application/json')
     end
 
     # Generic response handler
     def generic_response(opts = {})
-      defaults = {
-          code: 404,
-          message: 'Endpoint not found',
+      defaults           = {
+          code:         404,
+          message:      'Endpoint not found',
           content_type: 'text/html'
       }.merge(opts)
 
       defaults[:message] = File.read(defaults[:file]) unless defaults[:file].nil?
 
-      @response.status = defaults[:code]
-      @response.body = defaults[:message]
+      @response.status       = defaults[:code]
+      @response.body         = defaults[:message]
       @response.content_type = defaults[:content_type]
     end
 

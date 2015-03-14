@@ -11,19 +11,19 @@ RSpec.describe Hshtg::Models, '#hashtag_models', focus: true do
     end
 
     it 'can be stale' do
-      htag = Hshtg::Models::Hashtag.new('Dummy')
+      htag           = Hshtg::Models::Hashtag.new('Dummy')
       htag.timestamp = Time.now - 61
       expect(htag.fresh?).to be_falsey
     end
 
     it 'can be fresh with custom expiration' do
-      htag = Hshtg::Models::Hashtag.new('Dummy')
+      htag           = Hshtg::Models::Hashtag.new('Dummy')
       htag.timestamp = Time.now - 195
       expect(htag.fresh?(200)).to be_truthy
     end
 
     it 'can be stale with custom expiration' do
-      htag = Hshtg::Models::Hashtag.new('Dummy')
+      htag           = Hshtg::Models::Hashtag.new('Dummy')
       htag.timestamp = Time.now - 200
       expect(htag.fresh?(195)).to be_falsey
     end

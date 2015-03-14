@@ -18,7 +18,7 @@ RSpec.describe Hshtg, '#integrations' do
     SERVER_HOST = 'http://localhost:3000'
     it 'can be queried with top10' do
       response = Net::HTTP.get_response(URI("#{SERVER_HOST}/top10"))
-      results = JSON.parse(response.body)
+      results  = JSON.parse(response.body)
       expect(results.count).to be_between(1, 10)
     end
 
@@ -50,8 +50,8 @@ RSpec.describe Hshtg, '#integrations' do
     end
 
     it 'will respond with HTTP HEAD health check' do
-      uri = URI(SERVER_HOST)
-      http = Net::HTTP.new(uri.host, uri.port)
+      uri      = URI(SERVER_HOST)
+      http     = Net::HTTP.new(uri.host, uri.port)
       response = http.head('/')
       expect(response['Status']).to eq('up')
     end
