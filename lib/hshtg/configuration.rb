@@ -13,8 +13,8 @@ module Hshtg
     CONSUMER_SECRET_NAME     = 'TWITTER_CONSUMER_SECRET'
     ACCESS_TOKEN_KEY_NAME    = 'TWITTER_ACCESS_TOKEN'
     ACCESS_TOKEN_SECRET_NAME = 'TWITTER_ACCESS_TOKEN_SECRET'
-    STREAM_URL       = '/1.1/statuses/sample.json'
-    SITE_URL         ='https://stream.twitter.com'
+    STREAM_URL               = '/1.1/statuses/sample.json'
+    SITE_URL                 ='https://stream.twitter.com'
 
     def case_sensitive_matching
       @case_sensitive_matching ||= false

@@ -20,7 +20,6 @@ module Hshtg
       # Get the fresh tags from memory
       def fresh_tags(age_gt = 60)
         @hash_tags = @hash_tags.select { |t| t.fresh?(age_gt) }
-        @hash_tags
       end
 
       # Clear all tags
