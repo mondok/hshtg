@@ -1,19 +1,19 @@
 ```
-									   _  _    __    __       _______. __    __  .___________.  _______ 
+									   _  _    __    __       _______. __    __  .___________.  _______
 									 _| || |_ |  |  |  |     /       ||  |  |  | |           | /  _____|
 									|_  __  _||  |__|  |    |   (----`|  |__|  | `---|  |----`|  |  __  
-									 _| || |_ |   __   |     \   \    |   __   |     |  |     |  | |_ | 
-									|_  __  _||  |  |  | .----)   |   |  |  |  |     |  |     |  |__| | 
+									 _| || |_ |   __   |     \   \    |   __   |     |  |     |  | |_ |
+									|_  __  _||  |  |  | .----)   |   |  |  |  |     |  |     |  |__| |
 									  |_||_|  |__|  |__| |_______/    |__|  |__|     |__|      \______|
 
 														Hshtg - A Twitter Top Hashtag API
 ```
-# Introduction 
+# Introduction
 Hshtg is a small API that serves one purpose:  return the top n hashtags on a Twitter in the last 60 seconds.  It relies on the Twitter [sample stream firehose](https://dev.twitter.com/streaming/reference/get/statuses/sample) to retrieve data.
 
 # Running
 
-## Setup 
+## Setup
 In order to run Hshtg, you need four environment variables to be set.  Hshtg will also check for the presence of a `.env` file and use that if it exists.  You can copy the `sample.env` file to `.env` if you want.  The variables inside are:
 
 ```
@@ -54,7 +54,7 @@ The feed itself will be available at `http://localhost:3000/top10` and it return
 ### Quick Note on Case
 When referring to case, if case sensitivity is on then #tag and #Tag will be treated as two different hashtags.  If it is off, #tag and #Tag will be treated as a single hashtag.
 
-## Endpoints 
+## Endpoints
 The following endpoints are available:
 
 ```
@@ -84,10 +84,10 @@ bundle install --binstubs
 
 To run the unit tests, run:
 ```
-./bin/rspec
+bundle exec rspec spec
 ```
 
 To run the integration tests, run:
 ```
-./bin/rspec spec/integration_spec.rb
+bundle exec rspec spec/integration_spec.rb
 ```
