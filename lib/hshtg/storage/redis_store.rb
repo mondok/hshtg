@@ -2,7 +2,7 @@
 # and makes some basic assumptions.  These
 # assumptions include that the Redis instance is local and
 # that it is solely dedicated to only this data.
-require 'redis' if Hshtg::Utils.redis_available?
+require 'redis' if Hshtg::Utils.gem_available?('redis')
 require 'securerandom'
 
 module Hshtg

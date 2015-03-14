@@ -30,7 +30,7 @@ module Hshtg
           # Optionally use Redis as a cache store
           opts.on('-s', '--store [in-memory]', 'type of backend storage for storing hashtags (in-memory or redis)') do |storage|
             if storage.downcase == 'redis'
-              if Hshtg::Utils.redis_available?
+              if Hshtg::Utils.gem_available?('redis')
                 options[:storage] = Hshtg::Storage::RedisStore
               else
                 puts 'Redis is not available because the gem is not installed'

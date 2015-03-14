@@ -56,8 +56,9 @@ module Hshtg
 
     # This is if the query comes through successfully
     def handle_top_request
-      size = strip_for_top
+      size = Hshtg::Utils.suffix_number('/top', @request.path)
       return generic_response({ code: 500, message: 'Invalid request' }) unless size
+
       controller = Hshtg::StreamController.instance
       tags       = controller.top_n(size)
       generic_response(code: 200, message: JSON.generate(tags), content_type: 'application/json')
@@ -78,13 +79,5 @@ module Hshtg
       @response.content_type = defaults[:content_type]
     end
 
-    # Strip out the number from a topX request
-    def strip_for_top
-      # Dirty gsubbing
-      size = @request.path.downcase.gsub('/top', '')
-      # Check for positive integer
-      return nil if !/\A\d+\z/.match(size) || size.to_i == 0
-      return size.to_i
-    end
   end
 end
