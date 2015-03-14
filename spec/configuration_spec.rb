@@ -7,18 +7,18 @@ RSpec.describe Hshtg::Configuration, '#configuration', focus: true do
     end
 
     it 'can check validity' do
-      ENV[hash_config::TWITTER_ACCESS_TOKEN_KEY_NAME]    = '123'
-      ENV[hash_config::TWITTER_ACCESS_TOKEN_SECRET_NAME] = '456'
-      ENV[hash_config::TWITTER_CONSUMER_KEY_NAME]        = '789'
-      ENV[hash_config::TWITTER_CONSUMER_SECRET_NAME]     = '0'
+      ENV[hash_config::ACCESS_TOKEN_KEY_NAME]    = '123'
+      ENV[hash_config::ACCESS_TOKEN_SECRET_NAME] = '456'
+      ENV[hash_config::CONSUMER_KEY_NAME]        = '789'
+      ENV[hash_config::CONSUMER_SECRET_NAME]     = '0'
       expect(hash_config.is_valid?).to be_truthy
     end
 
     it 'can be invalid' do
-      ENV[hash_config::TWITTER_ACCESS_TOKEN_KEY_NAME]    = '123'
-      ENV[hash_config::TWITTER_ACCESS_TOKEN_SECRET_NAME] = '456'
-      ENV[hash_config::TWITTER_CONSUMER_KEY_NAME]        = '789'
-      ENV[hash_config::TWITTER_CONSUMER_SECRET_NAME]     = nil
+      ENV[hash_config::ACCESS_TOKEN_KEY_NAME]    = '123'
+      ENV[hash_config::ACCESS_TOKEN_SECRET_NAME] = '456'
+      ENV[hash_config::CONSUMER_KEY_NAME]        = '789'
+      ENV[hash_config::CONSUMER_SECRET_NAME]     = nil
       expect(hash_config.is_valid?).to be_falsey
     end
 
@@ -42,28 +42,28 @@ RSpec.describe Hshtg::Configuration, '#configuration', focus: true do
   context 'environment variables' do
     it 'can properly set access token' do
       value                                           = 'abc'
-      ENV[hash_config::TWITTER_ACCESS_TOKEN_KEY_NAME] = value
+      ENV[hash_config::ACCESS_TOKEN_KEY_NAME] = value
       token                                           = hash_config.access_token
       expect(token).to eq(value)
     end
 
     it 'can properly set access token secret' do
       value                                              = 'def'
-      ENV[hash_config::TWITTER_ACCESS_TOKEN_SECRET_NAME] = value
+      ENV[hash_config::ACCESS_TOKEN_SECRET_NAME] = value
       token                                              = hash_config.access_token_secret
       expect(token).to eq(value)
     end
 
     it 'can properly set consumer key' do
       value                                       = 'ghi'
-      ENV[hash_config::TWITTER_CONSUMER_KEY_NAME] = value
+      ENV[hash_config::CONSUMER_KEY_NAME] = value
       token                                       = hash_config.consumer_key
       expect(token).to eq(value)
     end
 
     it 'can properly set consumer secret' do
       value                                          = 'jkl'
-      ENV[hash_config::TWITTER_CONSUMER_SECRET_NAME] = value
+      ENV[hash_config::CONSUMER_SECRET_NAME] = value
       token                                          = hash_config.consumer_secret
       expect(token).to eq(value)
     end
