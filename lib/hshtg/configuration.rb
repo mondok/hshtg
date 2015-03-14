@@ -79,6 +79,15 @@ module Hshtg
       to_a.join(',')
     end
 
+    def env_variable_names
+      [
+        CONSUMER_KEY_NAME,
+        CONSUMER_SECRET_NAME,
+        ACCESS_TOKEN_KEY_NAME,
+        ACCESS_TOKEN_SECRET_NAME
+      ]
+    end
+
     def to_a
       [
           "Case Sensitivity: #{case_sensitive_matching}",

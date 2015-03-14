@@ -9,6 +9,6 @@ if __FILE__== $PROGRAM_NAME
   if Hshtg::Configuration.is_valid?
     Hshtg::ServerBootstrapper.start
   else
-    puts 'Please ensure all environment variables are set.'
+    Hshtg::Utils.no_keys_error_message
   end
 end

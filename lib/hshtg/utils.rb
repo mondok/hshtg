@@ -36,5 +36,16 @@ module Hshtg
       end
       true
     end
+
+    def no_keys_error_message
+      puts "ERROR:  Please ensure all the API environment variables are set either in a .env file or your profile.  The variables are:"
+      puts
+      Hshtg::Configuration.env_variable_names.each do |c|
+        puts "  #{c}=[YOUR #{c}]"
+      end
+      puts
+      puts "If you haven't yet generated your keys, you can create an App and get keys at https://apps.twitter.com/."
+      puts "There is also a sample.env file in the app root which you can use as an example to set keys local to the application."
+    end
   end
 end
