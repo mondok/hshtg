@@ -1,4 +1,4 @@
 module Hshtg
-  class StreamController
-  end
+	class StreamController
+	end
 end

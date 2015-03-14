@@ -1,4 +1,4 @@
 module Hshtg
-  class HashEndpoint
-  end
+	class HashEndpoint
+	end
 end

@@ -1,4 +1,4 @@
 module Hshtg
-  class ServerBootstrapper
-  end
+	class ServerBootstrapper
+	end
 end
