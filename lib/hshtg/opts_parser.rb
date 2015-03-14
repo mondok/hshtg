@@ -12,7 +12,8 @@ module Hshtg
 
           # Check if a file should be used to load defaults
           opts.on('-f', '--file [settings.yml]', 'use a yaml file to load settings - if other command line values are set, they will override the file values') do |f|
-            options = Hshtg::DiskConfig.new(f, options).options
+            file_name = f || 'settings.yml'
+            options = Hshtg::DiskConfig.new(file_name, options).options
           end
 
           # Check if case sensitivity should be set for grouping hash tags
