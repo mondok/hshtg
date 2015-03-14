@@ -1,6 +1,6 @@
 module Hshtg
-  module Models
-    class HashtagResult
-    end
-  end
+	module Models
+		class HashtagResult
+		end
+	end
 end

@@ -14,11 +14,11 @@ module Hshtg
 			end
 
 			# Determine if this tag is stale or not.
-			# Our default expiration is 60 seconds.
-			def fresh?(expiration = 60)
-				expiration ||= 60
+			# Our default expiration (age_gt) is 60 seconds.
+			def fresh?(age_gt = 60)
+				age_gt ||= 60
 				now = Time.now
-				now - expiration <= @timestamp
+				now - age_gt <= @timestamp
 			end
 
 			def grouping_tag(match_case)
