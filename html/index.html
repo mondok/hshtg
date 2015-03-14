@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+  <title>Hshtg</title>
+  <style>
+      th, td {
+          text-align: center;
+      }
+  </style>
+</head>
+<body>
+  <h1>Welcome to Hshtg streaming hashtag API!</h1>
+    <table style="width:100%;">
+        <thead>
+          <tr>
+              <th>Endpoint</th>
+              <th>VERB</th>
+              <th>Response Type</th>
+              <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+              <td>/</td>
+              <td>GET</td>
+              <td>HTML</td>
+              <td>Homepage</td>
+          </tr>
+          <tr>
+              <td>/</td>
+              <td>HEAD</td>
+              <td>No Response</td>
+              <td>Returns either "up" or "down" in Status response header</td>
+          </tr>
+          <tr>
+              <td>/topX</td>
+              <td>GET</td>
+              <td>JSON</td>
+              <td>Returns Top X hashtags where X is a positive integer</td>
+          </tr>
+          <tr>
+              <td>/health</td>
+              <td>GET</td>
+              <td>TEXT</td>
+              <td>Returns health check status info</td>
+          </tr>
+          <tr>
+              <td>/live</td>
+              <td>GET</td>
+              <td>HTML</td>
+              <td>HTML sample page that shows the API in action</td>
+          </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -16,7 +16,7 @@ module Hshtg
 		#   accept
 		#   content_type
 		def initialize(opts = {})
-			defaults = { consumer_key: Hshtg::Configuration.consumer_key,
+			@config = { consumer_key: Hshtg::Configuration.consumer_key,
 				consumer_secret: Hshtg::Configuration.consumer_secret,
 				access_token: Hshtg::Configuration.access_token,
 				access_token_secret: Hshtg::Configuration.access_token_secret,
@@ -24,9 +24,7 @@ module Hshtg
 				endpoint: Hshtg::Configuration.streaming_endpoint,
 				sign_request: true,
 				accept: 'application/json',
-			content_type: 'application/json' }
-
-			@config = defaults.merge(opts)
+			content_type: 'application/json' }.merge(opts)
 		end
 
 		# request object, returns [http, request]
