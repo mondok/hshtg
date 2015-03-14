@@ -9,6 +9,7 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
+  # enable so we can include integration tests but optionally run them
   config.filter_run focus: true
   config.run_all_when_everything_filtered = true
 end
