@@ -33,6 +33,22 @@ RSpec.describe Hshtg::OptsParser, '#opts_parser', focus: true do
       expect(options[:storage]).to eq(Hshtg::Storage::InMemoryStore)
     end
 
+    it 'can read settings from a yaml file' do
+      options = Hshtg::OptsParser.options(['--file', './spec/dummy_settings.yml'])
+      expect(options[:storage]).to eq(Hshtg::Storage::InMemoryStore)
+      expect(options[:case]).to eq(true)
+      expect(options[:port]).to eq(999)
+      expect(options[:ttl]).to eq(1)
+    end
+
+    it 'can ignore a bad yaml file' do
+      options = Hshtg::OptsParser.options(['--file', './spec/i_dont_exist.yml'])
+      expect(options[:storage]).to eq(Hshtg::Storage::InMemoryStore)
+      expect(options[:case]).to eq(false)
+      expect(options[:port]).to eq(3000)
+      expect(options[:ttl]).to eq(60)
+    end
+
   end
 
 end

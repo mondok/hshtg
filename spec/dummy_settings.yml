@@ -1,0 +1,9 @@
+tags:
+  ttl: 1
+  case_sensitive_matching: true
+
+storage:
+  type: in-memory
+
+server:
+  port: 999
