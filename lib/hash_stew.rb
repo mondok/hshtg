@@ -1,1 +1,10 @@
-# TODO: require stuff
+require_relative 'hash_stew/models/hash_result'
+require_relative 'hash_stew/models/hashtag'
+require_relative 'hash_stew/storage/in_memory_store'
+require_relative 'hash_stew/configuration/configuration'
+require_relative 'hash_stew/hash_logger'
+require_relative 'hash_stew/hash_extractor'
+require_relative 'hash_stew/hash_endpoint'
+require_relative 'hash_stew/server_bootstrapper'
+require_relative 'hash_stew/stream_controller'
+require_relative 'hash_stew/stream_parser'

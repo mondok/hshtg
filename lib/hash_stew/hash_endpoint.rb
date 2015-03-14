@@ -1,1 +1,4 @@
-# TODO fill in
+module HashStew
+  class HashEndpoint
+  end
+end
