@@ -1,12 +1,12 @@
 ```
-									   _  _    __    __       _______. __    __  .___________.  _______
-									 _| || |_ |  |  |  |     /       ||  |  |  | |           | /  _____|
-									|_  __  _||  |__|  |    |   (----`|  |__|  | `---|  |----`|  |  __  
-									 _| || |_ |   __   |     \   \    |   __   |     |  |     |  | |_ |
-									|_  __  _||  |  |  | .----)   |   |  |  |  |     |  |     |  |__| |
-									  |_||_|  |__|  |__| |_______/    |__|  |__|     |__|      \______|
+   _  _    __    __       _______. __    __  .___________.  _______
+ _| || |_ |  |  |  |     /       ||  |  |  | |           | /  _____|
+|_  __  _||  |__|  |    |   (----`|  |__|  | `---|  |----`|  |  __  
+ _| || |_ |   __   |     \   \    |   __   |     |  |     |  | |_ |
+|_  __  _||  |  |  | .----)   |   |  |  |  |     |  |     |  |__| |
+  |_||_|  |__|  |__| |_______/    |__|  |__|     |__|      \______|
 
-														Hshtg - A Twitter Top Hashtag API
+					Hshtg - A Twitter Top Hashtag API
 ```
 # Introduction
 Hshtg is a small API that serves one purpose:  return the top n hashtags on a Twitter in the last 60 seconds.  It relies on the Twitter [sample stream firehose](https://dev.twitter.com/streaming/reference/get/statuses/sample) to retrieve data.
