@@ -9,7 +9,7 @@ require 'json'
 # to keep memory usage down to a minimum.
 module Hshtg
 	class StreamParser
-		include Hshtg::Logger
+		include Hshtg::HshtgLogger
 
 		# stored tags
 		attr_accessor :hash_store

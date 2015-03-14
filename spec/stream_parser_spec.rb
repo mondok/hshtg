@@ -8,6 +8,7 @@ RSpec.describe Hshtg::StreamParser, '#stream_parser', focus: true do
       http, request = builder.build_request
       auth_header = request.get_fields('Authorization').first
       expect(auth_header).to include('OAuth')
+      http.finish
     end
 
     it 'can skip a signed request' do

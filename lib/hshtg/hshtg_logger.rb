@@ -4,7 +4,7 @@ require 'logger'
 # and prints to STDOUT.
 # TODO add ability to log to a file
 module Hshtg
-	module Logger
+	module HshtgLogger
 		def self.included(base)
 			base.extend(ClassMethods)
 		end
