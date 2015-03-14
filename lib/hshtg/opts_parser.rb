@@ -9,6 +9,12 @@ module Hshtg
         options = { port: 3000, case: false, ttl: 60, storage: Hshtg::Storage::InMemoryStore }
         parser  = OptionParser.new do |opts|
           opts.banner = 'Usage: hshtg.rb [options]'
+
+          # Check if a file should be used to load defaults
+          opts.on('-f', '--file [settings.yml]', 'use a yaml file to load settings - if other command line values are set, they will override the file values') do |f|
+            options = Hshtg::DiskConfig.new(f, options).options
+          end
+
           # Check if case sensitivity should be set for grouping hash tags
           opts.on('-c', '--case [0]', 'case sensitivity (0 or 1), 1 for sensitive which means tags will be grouped separately if they are cased differently') do |c|
             val = c.to_i

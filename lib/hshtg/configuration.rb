@@ -15,6 +15,14 @@ module Hshtg
     TWITTER_SITE_URL                 ='https://stream.twitter.com'
 
     class << self
+      def port
+        @port ||= 3000
+      end
+
+      def port(value)
+        @port = value
+      end
+
       def case_sensitive_matching
         @case_sensitive_matching ||= false
       end

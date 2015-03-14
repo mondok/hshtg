@@ -1,0 +1,9 @@
+tags:
+  ttl: 60
+  case_sensitive_matching: false
+
+storage:
+  type: in-memory
+
+server:
+  port: 4000
