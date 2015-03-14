@@ -1,4 +1,4 @@
-module HashStew
+module Hshtg
   class InMemoryStore
   end
 end

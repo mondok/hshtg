@@ -1,3 +1,3 @@
-RSpec.describe HashStew::Configuration, '#configuration', focus: true do
+RSpec.describe Hshtg::Configuration, '#configuration', focus: true do
 
 end

@@ -1,2 +1,2 @@
-RSpec.describe HashStew::StreamController, '#stream_controller', focus: true do
+RSpec.describe Hshtg::StreamController, '#stream_controller', focus: true do
 end

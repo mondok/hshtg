@@ -1,4 +1,4 @@
-require './hash_stew'
+require './hshtg'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
