@@ -15,6 +15,7 @@ RSpec.describe Hshtg::StreamParser, '#stream_parser', focus: true do
       builder       = Hshtg::RequestBuilder.new({ sign_request: false })
       http, request = builder.build_request
       expect(request.get_fields('Authorization')).to be_nil
+      http.finish
     end
   end
 
