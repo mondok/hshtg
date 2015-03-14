@@ -8,6 +8,7 @@
 
 							Hshtg - A Twitter Top Hashtag API
 ```
+[![Build Status](https://travis-ci.org/mondok/hshtg.svg?branch=master)](https://travis-ci.org/mondok/hshtg)
 # Introduction
 Hshtg is a small API that serves one purpose:  return the top n hashtags on a Twitter in the last 60 seconds.  It relies on the Twitter [sample stream firehose](https://dev.twitter.com/streaming/reference/get/statuses/sample) to retrieve data.
 
