@@ -21,6 +21,9 @@ module Hshtg
 				now - age_gt <= @timestamp
 			end
 
+      # Depending on case, this is a
+      # helper to return the right tag
+      # to group on.
 			def grouping_tag(match_case)
 				if match_case
 					@tag
