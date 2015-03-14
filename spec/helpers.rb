@@ -7,4 +7,8 @@ module Helpers
       Hshtg::Models::Hashtag.new('three')
     ]
   end
+
+  def build_hashtag(tag_text)
+    Hshtg::Models::Hashtag.new(tag_text)
+  end
 end
