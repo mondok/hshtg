@@ -30,6 +30,10 @@ RSpec.describe Hshtg::Models, '#hashtag_models', focus: true do
   end
 
   context 'HashtagResult' do
-
+    it 'can create a new hashtag result' do
+      htag = Hshtg::Models::HashtagResult.new('Dummy', 10)
+      expect(htag.tag).to eq('Dummy')
+      expect(htag.count).to eq(10)
+    end
   end
 end

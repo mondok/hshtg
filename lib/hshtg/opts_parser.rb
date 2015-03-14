@@ -19,7 +19,7 @@ module Hshtg
           # Check if case sensitivity should be set for grouping hash tags
           opts.on('-c', '--case [0]', 'case sensitivity (0 or 1), 1 for sensitive which means tags will be grouped separately if they are cased differently') do |c|
             val = c.to_i
-            if val < 0 || val > 1
+            unless val.between?(0,1)
               puts 'Case must be 0 or 1'
               puts opts
               exit
