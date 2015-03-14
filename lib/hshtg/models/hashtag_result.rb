@@ -1,4 +1,4 @@
 module Hshtg
-  class HashResult
+  class HashtagResult
   end
 end
