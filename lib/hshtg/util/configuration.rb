@@ -31,7 +31,8 @@ module Hshtg
       #
       # returns boolean
       def case_sensitive_matching
-        @case_sensitive_matching ||= false
+        @case_sensitive_matching = false if @case_sensitive_matching.nil?
+        @case_sensitive_matching
       end
 
       # Public: Set case sensitivity
