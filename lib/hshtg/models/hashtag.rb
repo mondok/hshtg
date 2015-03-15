@@ -1,4 +1,4 @@
-# Hashtag stores a single tag and
+# Public: Hashtag stores a single tag and
 # the time it was created
 module Hshtg
   module Models
