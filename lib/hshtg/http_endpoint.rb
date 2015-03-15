@@ -21,6 +21,9 @@ module Hshtg
       elsif @request.path == '/live'
         generic_response(code: 200, file: './html/live.html')
 
+      elsif @request.path == '/liveReact'
+        generic_response(code: 200, file: './html/live_react.html')        
+
       elsif @request.path == '/health'
         health_check_request
 

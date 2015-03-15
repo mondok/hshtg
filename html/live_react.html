@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+<head>
+    <title>Hashtag Test Page</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.0/react-with-addons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.0/JSXTransformer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.1.4/zepto.min.js"></script>
+    <script type="text/jsx">
+      var TagList = React.createClass({
+        loadTagsFromServer: function() {
+          $.ajax({
+            url: this.props.source,
+            dataType: 'json',
+            success: function(data) {
+              this.setState({tags: data});
+            }.bind(this),
+            error: function(xhr, status, err) {
+              console.error(this.props.source, status, err.toString());
+            }.bind(this)
+          });
+        },
+        getInitialState: function() {
+          return {
+            tags: []
+          };
+        },
+
+        componentDidMount: function() {
+          this.loadTagsFromServer();
+          setInterval(this.loadTagsFromServer, this.props.refreshInterval);
+        },
+
+        render: function() {
+          var items = this.state.tags.map(function(t) {
+             return (
+               <tr>
+                 <td className={'col-1'}>{t.tag}</td>
+                 <td>{t.count}</td>
+                 <td><a href={"https://twitter.com/hashtag/" + t.tag} target='_blank' className={'btn btn-info'}>View on Twitter</a> </td>
+               </tr>
+             )
+           });
+
+          return (
+            <table className={'table table-striped'}>
+                <thead>
+                <tr>
+                    <th>Tag</th>
+                    <th>Count</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                  {items}
+                </tbody>
+            </table>
+          )
+        }
+      });
+
+      React.render(
+        <TagList source="/top10" refreshInterval="1000" />,
+        document.getElementById('react_table')
+      );
+
+    </script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <style>
+      .col-1{
+        width: 40%;
+      }
+    </style>
+</head>
+<body>
+
+
+<div class="container">
+    <div class="header">
+        <nav>
+            <ul class="nav nav-pills pull-right">
+                <li role="presentation"><a href="/">Home</a></li>
+                <li role="presentation" class="active"><a href="/live">Live Page</a></li>
+                <li role="presentation"><a href="/health">Health</a></li>
+                <li role="presentation"><a href="/top10">Top 10 JSON</a></li>
+            </ul>
+        </nav>
+        <h3 class="text-muted">Top Trending Hashtags on Twitter (ReactJS)</h3>
+    </div>
+
+    <div class="row marketing">
+        <div class="col-lg-12">
+          <div id="react_table"></div>
+        </div>
+    </div>
+
+    <footer class="footer">
+    </footer>
+
+</div>
+<!-- /container -->
+
+</body>
+</html>
