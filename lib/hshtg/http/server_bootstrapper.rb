@@ -44,6 +44,8 @@ module Hshtg
 
           trap_signals
 
+          logger.info("Server starting with PID #{Process.pid}")
+
           @server.start
         end
 

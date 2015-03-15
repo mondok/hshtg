@@ -26,6 +26,9 @@ TWITTER_ACCESS_TOKEN_SECRET=[Twitter Access Token Secret]
 
 You can get these credentials by creating a new [Twitter application](https://apps.twitter.com/) then going under the "Keys and Access Tokens" area to generate the required keys.
 
+If you try to start the server without the environment variables set, the application will prompt you to set them up on the spot.  If you choose to do so, it will ask you for your keys and
+create a .env file in the root directory.  
+
 ## Running the Server
 First checkout this repository to your local machine.  Next, run `bundle install` to install any dependencies. To run the API, simply execute `ruby hshtg.rb`.  The default port is 3000.  Case sensitive matching is off by default.
 
@@ -69,9 +72,11 @@ The following endpoints are available:
 ## Signaling
 Certain unix signals can be sent to the service.  These signals include (9999 is PID):
 
-* HUP - Restarts the hashtag stream, i.e. `kill -1 9999`
+* HUP - Restarts the hashtag stream, i.e. `kill -1 9999` or `kill -HUP 9999`, etc.
 * INT/TERM - Immediately kills the server, i.e. `kill -2 9999`
 * QUIT - Gracefully closes the hashtag stream and exits, i.e. `kill -3 9999`
+
+You can see the PID at server boot or grab it with the shell command `ps ax | grep 'hshtg.rb' | grep -v grep | awk '{print $1}'`
 
 ## Storage
 By default, the API uses an in-memory store for hashtags.  The API also ships with an optional Redis store driver that can be used as well.  If you wish to use Redis, uncomment redis in the Gemfile, bundle install, and pass `-s redis` in the startup args.
