@@ -39,7 +39,7 @@ ruby hshtg.rb
 All startup options are:
 
 ```
-Usage: hshtg.rb [options]
+Usage: ruby hshtg.rb [options]
 	-f, --file [settings.yml]	use a yaml file to load settings - if other command line values are set, they will override the file values
 	-c, --case [0]   			case sensitivity (0 or 1), 1 for sensitive which means tags will be grouped separately if they are cased differently
 	-s, --store [in-memory]  	type of backend storage for storing hashtags (in-memory or redis)

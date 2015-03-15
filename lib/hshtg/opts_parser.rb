@@ -8,7 +8,7 @@ module Hshtg
         # handle the port options and help
         options = { port: 3000, case: false, ttl: 60, storage: Hshtg::Storage::InMemoryStore }
         parser  = OptionParser.new do |opts|
-          opts.banner = 'Usage: hshtg.rb [options]'
+          opts.banner = 'Usage: ruby hshtg.rb [options]'
 
           # Check if a file should be used to load defaults
           opts.on('-f', '--file [settings.yml]', 'use a yaml file to load settings - if other command line values are set, they will override the file values') do |f|
