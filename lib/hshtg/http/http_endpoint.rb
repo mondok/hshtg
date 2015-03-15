@@ -8,6 +8,7 @@ module Hshtg
     class HttpEndpoint < WEBrick::HTTPServlet::AbstractServlet
       include Util::HshtgLogger
 
+      # Handle GET requests 
       def do_GET (request, response)
         @request  = request
         @response = response
