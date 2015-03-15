@@ -47,6 +47,7 @@ Usage: ruby hshtg.rb [options]
 	-c, --case [0]   			case sensitivity (0 or 1), 1 for sensitive which means tags will be grouped separately if they are cased differently
 	-s, --store [in-memory]  	type of backend storage for storing hashtags (in-memory or redis)
 	-t, --ttl [60]   			tags time to live before they are not counted
+    -l, --logging [console]     where to output logs (console or filename)
 	-p, --port [3000]			server port to listen on
 	-h, --help   				displays help
 ```

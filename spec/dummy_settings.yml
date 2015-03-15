@@ -7,3 +7,6 @@ storage:
 
 server:
   port: 999
+
+logging:
+  device: file.log

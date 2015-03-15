@@ -7,3 +7,6 @@ storage:
 
 server:
   port: 4000
+
+logging:
+  device: console

@@ -8,7 +8,7 @@ module Hshtg
         # Public: parse the ARGV options
         def options(args)
           # handle the port options and help
-          options = { port: 3000, case: false, ttl: 60, storage: Storage::InMemoryStore }
+          options = { port: 3000, case: false, ttl: 60, storage: Storage::InMemoryStore, log_device: STDOUT }
           parser  = OptionParser.new do |opts|
             opts.banner = 'Usage: ruby hshtg.rb [options]'
 
@@ -50,6 +50,11 @@ module Hshtg
                 exit
               end
               options[:ttl] = t.to_i
+            end
+
+            # Instead of every 60 seconds, use a custom set time
+            opts.on('-l', '--logging [console]', 'where to output logs (console or filename)') do |device|
+              options[:log_device] = device != 'console' ? device : STDOUT
             end
 
             # Listen on a different port

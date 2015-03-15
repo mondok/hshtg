@@ -37,6 +37,13 @@ RSpec.describe Hshtg::Util::Configuration, '#configuration', focus: true do
     it 'can default time to 60 seconds' do
       expect(hash_config.tag_time_to_live_in_seconds).to eq(60)
     end
+
+    it 'can set logging' do
+      hash_config.log_capture_device = 'file_name.log'
+      expect(hash_config.log_capture_device).to eq('file_name.log')
+      hash_config.log_capture_device = STDOUT
+      expect(hash_config.log_capture_device).to eq(STDOUT)
+    end
   end
 
   context 'environment variables' do

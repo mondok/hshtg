@@ -19,6 +19,15 @@ RSpec.describe Hshtg::Util::OptsParser, '#opts_parser', focus: true do
       expect(options[:ttl]).to eq(1)
     end
 
+    it 'can change the default logging' do
+      options = Hshtg::Util::OptsParser.options(['-l', 'file.log'])
+      expect(options[:log_device]).to eq('file.log')
+    end
+    it 'can change the default log_device longform' do
+      options = Hshtg::Util::OptsParser.options(['--logging', 'file.log'])
+      expect(options[:log_device]).to eq('file.log')
+    end
+
     it 'can change the default port' do
       options = Hshtg::Util::OptsParser.options(['-p', '1'])
       expect(options[:port]).to eq(1)
@@ -39,6 +48,7 @@ RSpec.describe Hshtg::Util::OptsParser, '#opts_parser', focus: true do
       expect(options[:case]).to eq(true)
       expect(options[:port]).to eq(999)
       expect(options[:ttl]).to eq(1)
+      expect(options[:log_device]).to eq('file.log')
     end
 
     it 'can ignore a bad yaml file' do
@@ -47,6 +57,7 @@ RSpec.describe Hshtg::Util::OptsParser, '#opts_parser', focus: true do
       expect(options[:case]).to eq(false)
       expect(options[:port]).to eq(3000)
       expect(options[:ttl]).to eq(60)
+      expect(options[:log_device]).to eq(STDOUT)
     end
 
   end

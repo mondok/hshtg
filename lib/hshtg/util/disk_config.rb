@@ -22,6 +22,7 @@ module Hshtg
       def options
         return @options unless @config
 
+        handle_logging
         handle_tag_area
         handle_server_area
         handle_storage_area
@@ -29,6 +30,16 @@ module Hshtg
       end
 
       private
+
+      # Internal: Looks for any logging settings
+      #
+      # returns nothing
+      def handle_logging
+        section = @config['logging']
+        return unless section
+        device                     = section['device']
+        @options[:log_device]          = device != 'console' ? device : STDOUT
+      end
 
       # Internal: Looks for any tag-specific settings
       # and sets options

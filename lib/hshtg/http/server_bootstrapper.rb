@@ -94,11 +94,12 @@ module Hshtg
         #
         # Returns options hash
         def update_config_options
-          options                                                = Util::OptsParser.options(ARGV)
+          options                                         = Util::OptsParser.options(ARGV)
           Util::Configuration.tag_time_to_live_in_seconds = options[:ttl]
           Util::Configuration.case_sensitive_matching     = options[:case]
           Util::Configuration.hashtag_storage_class       = options[:storage]
-          current_config                                         = Util::Configuration.to_a
+          Util::Configuration.log_capture_device          = options[:log_device]
+          current_config                                  = Util::Configuration.to_a
           current_config << "Port: #{options[:port]}"
           logger.info(current_config.join(', '))
           options

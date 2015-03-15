@@ -26,6 +26,18 @@ module Hshtg
       # Public: Root stream url
       SITE_URL                 ='https://stream.twitter.com'
 
+      # Public: Log capture device
+      #
+      # returns log device
+      def log_capture_device
+        @log_capture_device ||= STDOUT
+      end
+
+      # Public: Set log capture device
+      def log_capture_device=(value)
+        @log_capture_device = value
+      end
+
       # Public: Determines whether to group with case sensitivity
       # and initializes to false
       #
@@ -153,7 +165,8 @@ module Hshtg
             "Hashtag TTL: #{tag_time_to_live_in_seconds}",
             "Storage Type: #{hashtag_storage_class}",
             "Streaming Endpoint: #{streaming_endpoint}",
-            "Valid Keys: #{is_valid?}"
+            "Valid Keys: #{is_valid?}",
+            "Log Device: #{log_capture_device == STDOUT ? 'console' : log_capture_device}"
         ]
       end
     end

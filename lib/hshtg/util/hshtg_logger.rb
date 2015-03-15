@@ -1,8 +1,7 @@
 require 'logger'
 
 # Public: Logging module that wraps standard logger
-# and prints to STDOUT.
-# TODO: add ability to log to a file
+# and prints to STDOUT or whatever is set in configuration.
 module Hshtg
   module Util
     module HshtgLogger
@@ -12,7 +11,7 @@ module Hshtg
 
       module ClassMethods
         def logger
-          @_logger       ||= Logger.new(STDOUT)
+          @_logger       ||= Logger.new(Configuration.log_capture_device)
           @_logger.level = Logger::INFO
           @_logger
         end
