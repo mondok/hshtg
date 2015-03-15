@@ -1,17 +1,24 @@
 require 'yaml'
 
-# Loads config values from file on disk
+# Public: Loads config values from file on disk
 module Hshtg
   module Util
     class DiskConfig
-      # Initialize with file name and existing options
+
+      # Public: Initialize with file name and existing options
       # If file is not found, ignore it
+      #
+      # Examples
+      #
+      #  DiskConfig.new('test.yml')
       def initialize(file_name, opts)
         @config  = YAML.load_file(file_name) if File.exist?(file_name)
         @options = opts
       end
 
-      # Get any configuration values that were in the file
+      # Public: Get any configuration values that were in the file
+      #
+      # returns hash
       def options
         return @options unless @config
 
@@ -23,6 +30,10 @@ module Hshtg
 
       private
 
+      # Internal: Looks for any tag-specific settings
+      # and sets options
+      #
+      # returns nothing
       def handle_tag_area
         section = @config['tags']
         return unless section
@@ -32,6 +43,10 @@ module Hshtg
         @options[:case]         = case_sensitive_matching if case_sensitive_matching
       end
 
+      # Internal: Looks for any server-specific settings
+      # and sets options
+      #
+      # returns nothing
       def handle_server_area
         section = @config['server']
         return unless section
@@ -39,6 +54,10 @@ module Hshtg
         @options[:port] = port if port
       end
 
+      # Internal: Looks for any storage-specific settings 
+      # and sets options
+      #
+      # returns nothing
       def handle_storage_area
         section = @config['storage']
         return unless section

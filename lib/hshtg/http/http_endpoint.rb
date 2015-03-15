@@ -1,14 +1,19 @@
 require 'webrick'
 require 'json'
 
-# This is the Webrick endpoint for
+# Public: This is the Webrick endpoint for
 # serving requests down to the client
 module Hshtg
   module Http
     class HttpEndpoint < WEBrick::HTTPServlet::AbstractServlet
       include Util::HshtgLogger
 
-      # Handle GET requests 
+      # Public: WEBrick GET request handler
+      #
+      # request - the HTTP request
+      # response - the HTTP response
+      #
+      # returns HTTP response
       def do_GET (request, response)
         @request  = request
         @response = response
@@ -31,7 +36,12 @@ module Hshtg
         end
       end
 
-      # Handle HEAD requests for health checks
+      # Public: WEBrick HEAD request handler
+      #
+      # request - the HTTP request
+      # response - the HTTP response
+      #
+      # returns HTTP response
       def do_HEAD (request, response)
         @request  = request
         @response = response
@@ -43,7 +53,9 @@ module Hshtg
 
       private
 
-      # Handle a HTTP GET on a health check request
+      # Internal: Handles a request to the healthcheck HTML page.
+      #
+      # Returns nothing
       def health_check_request
         controller = Stream::StreamController.instance
         if controller
@@ -56,7 +68,9 @@ module Hshtg
         generic_response(code: 200, message: body, content_type: 'text/plain')
       end
 
-      # This is if the query comes through successfully
+      # Internal: Handles a request to the topX JSON API
+      #
+      # Returns nothing
       def handle_top_request
         size = Util::Utils.suffix_number('/top', @request.path)
         return generic_response({ code: 500, message: 'Invalid request' }) unless size
@@ -66,7 +80,15 @@ module Hshtg
         generic_response(code: 200, message: JSON.generate(tags), content_type: 'application/json')
       end
 
-      # Generic response handler
+      # Internal: Handles a response generically based on options.
+      #
+      # opts - Options to set on the generic_response
+      #
+      # Examples
+      #
+      #  generic_response(code: 404, message: 'Not Found', content_type: 'text/html')
+      #
+      # Returns nothing
       def generic_response(opts = {})
         defaults           = {
             code:         404,

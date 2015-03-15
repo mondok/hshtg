@@ -1,8 +1,8 @@
 require 'logger'
 
-# Logging module that wraps standard logger
+# Public: Logging module that wraps standard logger
 # and prints to STDOUT.
-# TODO add ability to log to a file
+# TODO: add ability to log to a file
 module Hshtg
   module Util
     module HshtgLogger

@@ -1,10 +1,11 @@
 require 'optparse'
 
-# Options Parser class to get config values from command line
+# Public: Options Parser class to get config values from command line
 module Hshtg
   module Util
     class OptsParser
       class << self
+        # Public: parse the ARGV options
         def options(args)
           # handle the port options and help
           options = { port: 3000, case: false, ttl: 60, storage: Storage::InMemoryStore }

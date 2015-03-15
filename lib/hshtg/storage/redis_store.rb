@@ -1,10 +1,10 @@
-# Redis store for Hashtag objects.  This is a very basic store
-# and makes some basic assumptions.  These
-# assumptions include that the Redis instance is local and
-# that it is solely dedicated to only this data.
 require 'redis' if Hshtg::Util::Utils.gem_available?('redis')
 require 'securerandom'
 
+# Public: Redis store for Hashtag objects.  This is a very basic store
+# and makes some basic assumptions.  These
+# assumptions include that the Redis instance is local and
+# that it is solely dedicated to only this data.
 module Hshtg
   module Storage
     class RedisStore
@@ -15,8 +15,10 @@ module Hshtg
         @evict_time = Util::Configuration.tag_time_to_live_in_seconds
       end
 
-      # All values in Redis.  We're using pipelining here
+      # Public: All values in Redis.  We're using pipelining here
       # to atomically request the keys.
+      #
+      # returns array of Hashtag
       def values
         ks          = @client.keys
         res         = []
@@ -35,7 +37,15 @@ module Hshtg
         res
       end
 
-      # Add tags to collection
+      # Public: Add tags to collection.
+      #
+      # *tags - array of Hashtag
+      #
+      # Examples
+      #
+      #  add_tags(tag1, tag2)
+      #
+      # returns nothing
       def add_tags(*tags)
         # We're just picking a random Guid to use
         # The assumption here is that this Redis instance is
@@ -52,28 +62,38 @@ module Hshtg
         end
       end
 
-      # Evict tags that aren't so fresh, but we
+      # Public: Evict tags that aren't so fresh, but we
       # don't need to handle it directly because
       # Redis expires the keys for us
+      #
+      # returns nothing
       def evict_old_tags(*)
       end
 
-      # Just return all tags (See above)
+      # Public: Just return all tags since they are fresh
+      #
+      # returns array of Hashtag
       def fresh_tags(*)
         all
       end
 
-      # Clear all tags
+      # Public: Clear all tags
+      #
+      # returns nothing
       def clear
         @client.flushall
       end
 
-      # Tags count
+      # Public: Number of tags
+      #
+      # returns integer
       def count
         values.count
       end
 
-      # Tags themselves
+      # Public: All available tags
+      #
+      # returns array of Hashtag
       def all
         values
       end

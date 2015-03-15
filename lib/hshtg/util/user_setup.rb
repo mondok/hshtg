@@ -1,14 +1,17 @@
-# Setup class if user's Twitter keys are not set yet
+# Public: Setup class if user's Twitter keys are not set yet
 module Hshtg
   module Util
     class UserSetup
-      # Initialize with any variables we want to set
+      # Public: Initialize with any variables we want to set
       def initialize(env_variable_names)
         @envs    = env_variable_names
         @results = {}
       end
 
-      # Try to help guide the user
+      # Public: If the keys aren't set, warn the user.  Then ask
+      # the user if they would like to setup the keys.
+      #
+      # returns nothing
       def try_help
         if warn
           ask
@@ -18,8 +21,10 @@ module Hshtg
 
       private
 
-      # Warn the user that things aren't setup
+      # Internal: Warn the user that things aren't setup
       # and ask them if they'd like the server to do the work.
+      #
+      # return boolean if they want to set things up
       def warn
         puts 'ERROR:  Please ensure all the API environment variables are set either in a .env file or your profile.  The variables are:'
         puts
@@ -34,7 +39,9 @@ module Hshtg
         val == 'Y'
       end
 
-      # Question them!
+      # Internal: Ask the user about each key and set the value
+      #
+      # returns nothing
       def ask
         @envs.each do |e|
           puts "What is the value of your #{e}?"
@@ -42,7 +49,9 @@ module Hshtg
         end
       end
 
-      # Write the .env file to disk
+      # Internal: Write the .env file to disk
+      #
+      # returns nothing
       def write!
         File.open('.env', 'w') do |file|
           @results.each do |key, value|

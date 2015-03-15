@@ -6,6 +6,7 @@ require_relative 'lib/hshtg/util/user_setup'
 # Check for .env file
 Hshtg::Util::Utils.load_env_vars
 
+# If it's being run without testing
 if __FILE__== $PROGRAM_NAME
   if Hshtg::Util::Configuration.is_valid?
     Hshtg::Http::ServerBootstrapper.start

@@ -2,7 +2,7 @@ require 'oauth'
 require 'net/http'
 require 'json'
 
-# The StreamParser manages the threading and the
+# Public: The StreamParser manages the threading and the
 # Twitter firehose of content.
 # It opens a single thread and "drinks from the firehose."
 # It also manages the eviction of old tags
@@ -12,10 +12,16 @@ module Hshtg
     class StreamParser
       include Util::HshtgLogger
 
-      # stored tags
+      # Public: Hashtag storage container
       attr_accessor :hash_store
 
-      # accept hash_store option in case we want to use a backend and not in-memory storage
+      # Public: initialize StreamParser and
+      # accept hash_store option in case we want
+      # to use a backend and not in-memory storage
+      #
+      # Examples
+      #
+      #  StreamParser.new(Hshtg::Storage::InMemoryStore)
       def initialize(hash_store)
         # Initialize the thread to nil
         @main_thread     = nil
@@ -26,19 +32,25 @@ module Hshtg
         @request_builder = Http::RequestBuilder.new
       end
 
-      # Opens the Twitter firehose
+      # Public: Opens the Twitter firehose
+      #
+      # returns nothing
       def begin_read
         logger.info('Open the firehose')
         open_thread
       end
 
-      # Resets the firehose
+      # Public: Resets the firehose
+      #
+      # returns nothing
       def reset!
         logger.info('Reset the firehose')
         reset_stream
       end
 
-      # Shut. Down. Everything.
+      # Public: Shut. Down. Everything.
+      #
+      # returns nothing
       def shutdown!
         logger.info('Shutting down the Firehose')
         reset_stream(true)
@@ -46,25 +58,33 @@ module Hshtg
 
       private
 
-      # Add tags to storage layer
+      # Internal: Add tags to storage layer
+      #
+      # returns array of Hashtag
       def add_tags(tags)
         @hash_store.add_tags(tags)
       end
 
-      # Evicts old tags based on a time constraint
+      # Internal: Evicts old tags based on a time constraint
+      #
+      # returns array of Hashtag
       def evict_old_tags
         @hash_store.evict_old_tags(Util::Configuration.tag_time_to_live_in_seconds)
       end
 
-      # This fires our worker thread.  It sets main_thread
+      # Internal: This fires our worker thread.  It sets main_thread
       # and eventually opens the firehose.
+      #
+      # returns nothing
       def open_thread
         cleanup_thread
         @reset       = false
         @main_thread = Thread.new { thread }
       end
 
-      # Thread wrapper that runs the worker
+      # Internal: Thread wrapper that runs the worker
+      #
+      # returns nothing
       def thread
         process_stream
       rescue Interrupt, TypeError
@@ -73,20 +93,26 @@ module Hshtg
         logger.fatal(e)
       end
 
-      # If the current thread is alive, we want to
+      # Internal: If the current thread is alive, we want to
       # gracefully exit it.
+      #
+      # returns nothing
       def cleanup_thread
         return unless @main_thread
         @main_thread.terminate
         @main_thread = nil
       end
 
-      # Recycle the thread from zero.  We need to first stop the
+      # Internal: Recycle the thread from zero.  We need to first stop the
       # current thread gracefully, then create it again.
       # Notice we wait to clear the hash_tags array until after
       # we have confirmation of the thread wrapping up.
       # If the stop_processing boolean is true, we're looking to not
       # start processing again.
+      #
+      # stop_processing - boolean determining whether processing should reset
+      #
+      # returns nothing
       def reset_stream(stop_processing = false)
         @reset = true
         cleanup_thread
@@ -94,7 +120,9 @@ module Hshtg
         begin_read unless stop_processing
       end
 
-      # Worker logic - opens the stream and reads from it
+      # Internal: Worker logic - opens the stream and reads from it
+      #
+      # returns nothing
       def process_stream
         http, request = @request_builder.build_request
         http.request request do |response|
