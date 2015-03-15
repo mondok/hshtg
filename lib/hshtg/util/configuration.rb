@@ -69,11 +69,6 @@ module Hshtg
         @hashtag_storage_class = value
       end
 
-      # TODO: remove this as it duplicates above
-      def storage_class
-        @hashtag_storage_class ||= Hshtg::Storage::InMemoryStore
-      end
-
       # Public: Consumer key used for signing that must be set
       # in an environment variable
       #

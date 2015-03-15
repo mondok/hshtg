@@ -33,7 +33,7 @@ module Hshtg
       #                       )
       def initialize(opts = {})
         @config = {
-            hash_store_class: Util::Configuration.storage_class,
+            hash_store_class: Util::Configuration.hashtag_storage_class,
             tag_ttl:          Util::Configuration.tag_time_to_live_in_seconds,
             case_sensitive:   Util::Configuration.case_sensitive_matching
         }.merge(opts)
