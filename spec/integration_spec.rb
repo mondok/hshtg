@@ -3,15 +3,15 @@ require 'json'
 
 RSpec.describe Hshtg, '#integrations' do
   before(:all) do
-    Hshtg::Utils.load_env_vars
+    Hshtg::Util::Utils.load_env_vars
 
     puts 'Starting server for tests'
-    Thread.new { Hshtg::ServerBootstrapper.start }
+    Thread.new { Hshtg::Http::ServerBootstrapper.start }
     sleep 10
   end
   after(:all) do
     puts 'Stopping server for tests'
-    Hshtg::ServerBootstrapper.stop
+    Hshtg::Http::ServerBootstrapper.stop
   end
 
   context 'server' do

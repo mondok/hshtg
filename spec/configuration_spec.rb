@@ -1,5 +1,5 @@
-RSpec.describe Hshtg::Configuration, '#configuration', focus: true do
-  hash_config = Hshtg::Configuration
+RSpec.describe Hshtg::Util::Configuration, '#configuration', focus: true do
+  hash_config = Hshtg::Util::Configuration
 
   context 'general configuration management' do
     it 'can properly create a uri' do

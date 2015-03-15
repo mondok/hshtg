@@ -1,10 +1,10 @@
 require 'net/http'
 require 'uri'
 
-RSpec.describe Hshtg::StreamParser, '#stream_parser', focus: true do
+RSpec.describe Hshtg::Stream::StreamParser, '#stream_parser', focus: true do
   context 'request builder' do
     it 'can create a signed request' do
-      builder       = Hshtg::RequestBuilder.new
+      builder       = Hshtg::Http::RequestBuilder.new
       http, request = builder.build_request
       auth_header   = request.get_fields('Authorization').first
       expect(auth_header).to include('OAuth')
@@ -12,7 +12,7 @@ RSpec.describe Hshtg::StreamParser, '#stream_parser', focus: true do
     end
 
     it 'can skip a signed request' do
-      builder       = Hshtg::RequestBuilder.new({ sign_request: false })
+      builder       = Hshtg::Http::RequestBuilder.new({ sign_request: false })
       http, request = builder.build_request
       expect(request.get_fields('Authorization')).to be_nil
       http.finish
@@ -33,7 +33,7 @@ RSpec.describe Hshtg::StreamParser, '#stream_parser', focus: true do
     end
 
     it 'can contain hash tags' do
-      handler        = Hshtg::StreamParser.new(Hshtg::Storage::InMemoryStore.new)
+      handler        = Hshtg::Stream::StreamParser.new(Hshtg::Storage::InMemoryStore.new)
       tag1           = build_hashtag('test')
       tag1.timestamp = Time.now - 120
       handler.hash_store.add_tags(tag1, build_hashtag('test2'))
@@ -41,7 +41,7 @@ RSpec.describe Hshtg::StreamParser, '#stream_parser', focus: true do
     end
 
     it 'can evict old hash tags' do
-      handler        = Hshtg::StreamParser.new(Hshtg::Storage::InMemoryStore.new)
+      handler        = Hshtg::Stream::StreamParser.new(Hshtg::Storage::InMemoryStore.new)
       tag1           = build_hashtag('test')
       tag1.timestamp = Time.now - 120
       handler.hash_store.add_tags(tag1, build_hashtag('test2'))

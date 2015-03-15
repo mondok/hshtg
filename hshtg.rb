@@ -1,16 +1,16 @@
 #!/usr/bin/env ruby
 
 require_relative 'lib/hshtg'
-require_relative 'lib/hshtg/user_setup'
+require_relative 'lib/hshtg/util/user_setup'
 
 # Check for .env file
-Hshtg::Utils.load_env_vars
+Hshtg::Util::Utils.load_env_vars
 
 if __FILE__== $PROGRAM_NAME
-  if Hshtg::Configuration.is_valid?
-    Hshtg::ServerBootstrapper.start
+  if Hshtg::Util::Configuration.is_valid?
+    Hshtg::Http::ServerBootstrapper.start
   else
-    user_setup = Hshtg::UserSetup.new(Hshtg::Configuration.env_variable_names)
+    user_setup = Hshtg::Util::UserSetup.new(Hshtg::Util::Configuration.env_variable_names)
     user_setup.try_help
   end
 end

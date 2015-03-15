@@ -2,7 +2,7 @@
 # and makes some basic assumptions.  These
 # assumptions include that the Redis instance is local and
 # that it is solely dedicated to only this data.
-require 'redis' if Hshtg::Utils.gem_available?('redis')
+require 'redis' if Hshtg::Util::Utils.gem_available?('redis')
 require 'securerandom'
 
 module Hshtg
@@ -12,7 +12,7 @@ module Hshtg
         # this only works with localhost
         # TODO: extend this to be configurable - YAML config?
         @client     = Redis.new
-        @evict_time = Hshtg::Configuration.tag_time_to_live_in_seconds
+        @evict_time = Util::Configuration.tag_time_to_live_in_seconds
       end
 
       # All values in Redis.  We're using pipelining here
@@ -30,7 +30,7 @@ module Hshtg
 
         # let the pipeline finish to get the futures out
         temp_values.each do |t|
-          res << Hshtg::Models::Hashtag.new(t.value)
+          res << Models::Hashtag.new(t.value)
         end
         res
       end
