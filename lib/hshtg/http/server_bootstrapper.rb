@@ -45,9 +45,13 @@ module Hshtg
 
         # Public: Start the WEBrick Server.
         #
+        # controller - StreamController interface for processing text
+        #
         # Examples
         #
         #  ServerBootstrapper.start
+        #  ServerBootstrapper.start(Stream::StreamController.instance)
+        #  ServerBootstrapper.start(MyCustomStreamProcessor.instance)
         #
         # Returns nothing
         def start(controller = Stream::StreamController.instance)
