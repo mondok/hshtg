@@ -20,6 +20,29 @@ module Hshtg
           @server.shutdown if @server
         end
 
+        # Public: Gracefully stops server and controller
+        #
+        # Examples
+        #
+        #  ServerBootstrapper.stop_soft
+        #
+        # Returns nothing
+        def stop_soft
+          @controller.stop if @controller
+          stop
+        end
+
+        # Public: Reset the controller and index
+        #
+        # Examples
+        #
+        #  ServerBootstrapper.reset
+        #
+        # Returns nothing
+        def reset
+          @controller.reset if @controller
+        end
+
         # Public: Start the WEBrick Server.
         #
         # Examples
@@ -27,7 +50,7 @@ module Hshtg
         #  ServerBootstrapper.start
         #
         # Returns nothing
-        def start
+        def start(controller = Stream::StreamController.instance)
           # make sure all the keys are set
           validate_keys
 
@@ -37,7 +60,7 @@ module Hshtg
           @server     = WEBrick::HTTPServer.new(Port: options[:port])
 
           # start singleton stream controller
-          @controller = Stream::StreamController.instance.start
+          @controller = controller.start
 
           # mount the REST server on webrick
           @server.mount '/', Http::HttpEndpoint
@@ -58,26 +81,25 @@ module Hshtg
           # kill
           trap('INT') do
             puts('INT received')
-            @server.shutdown
+            stop
           end
 
           # kill
           trap('TERM') do
             puts('TERM received')
-            @server.shutdown
+            stop
           end
 
           # graceful
           trap('QUIT') do
             puts('QUIT received')
-            @controller.stop
-            @server.shutdown
+            stop_soft
           end
 
           # reset things
           trap('HUP') do
             puts('HUP received')
-            @controller.reset
+            reset
           end
         end
 
