@@ -9,6 +9,13 @@ module Hshtg
       include Util::HshtgLogger
 
       class << self
+        attr_accessor :subscribers
+
+        def subscribe(subscriber)
+          @subscribers ||= []
+          @subscribers << subscriber if subscriber.respond_to?(:notify)
+        end
+
         # Public: Stop the WEBrick Server.
         #
         # Examples
@@ -51,6 +58,14 @@ module Hshtg
 
         private
 
+        def notify_subscribers(message)
+          if @subscribers
+            @subscribers.each do |s|
+              s.notify(message)
+            end
+          end
+        end
+
         # Internal: Traps any UNIX signals and acts accordingly
         #
         # Returns nothing
@@ -58,18 +73,21 @@ module Hshtg
           # kill
           trap('INT') do
             puts('INT received')
+            notify_subscribers('INT received')
             @server.shutdown
           end
 
           # kill
           trap('TERM') do
             puts('TERM received')
+            notify_subscribers('TERM received')
             @server.shutdown
           end
 
           # graceful
           trap('QUIT') do
             puts('QUIT received')
+            notify_subscribers('QUIT received')
             @controller.stop
             @server.shutdown
           end
@@ -77,6 +95,7 @@ module Hshtg
           # reset things
           trap('HUP') do
             puts('HUP received')
+            notify_subscribers('HUP received')
             @controller.reset
           end
         end
