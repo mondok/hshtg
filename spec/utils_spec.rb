@@ -20,5 +20,13 @@ RSpec.describe Hshtg::Util::Utils, '#utils', focus: true do
       val = Hshtg::Util::Utils.positive_integer('x')
       expect(val).to be_falsey
     end
+    it 'can parse env variables' do
+      vars = ['TAG1=test', 'TAG2=test1', 'TAG3=test3', '', 'nothing', '# A comment']
+      successes = Hshtg::Util::Utils.parse_env_vars(vars)
+      expect(successes).to be(3)
+      successes = Hshtg::Util::Utils.parse_env_vars('TEST', 'TEST=1', '#COMMENT', nil, 'TEST', 'TEEE=')
+      expect(successes).to be(2)
+    end
+
   end
 end
