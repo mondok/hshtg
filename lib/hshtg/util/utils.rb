@@ -55,13 +55,31 @@ module Hshtg
       def load_env_vars
         exists = File.exist?('.env')
         return false unless exists
-
+        lines = []
         File.open('.env', 'r').each_line do |line|
-          a = line.chomp("\n").split('=', 2)
-          a[1].gsub!(/^"|"$/, '') if ['\'', '"'].include?(a[1][0])
-          eval "ENV['#{a[0]}']='#{a[1] || ''}'"
+          lines << line
         end
+        parse_env_vars(lines)
         true
+      end
+
+      # Public: Load array of strings into ENV variables
+      #
+      # Examples
+      #  parse_env_vars('TAG1=test', 'TAG2=test1')
+      #
+      # returns integer for number of vars set
+      def parse_env_vars(*env_vars)
+        success = 0
+        env_vars.flatten.each do |env|
+          a = env.chomp("\n").split('=', 2) if env
+          if a && a.length == 2
+            a[1].gsub!(/^"|"$/, '') if ['\'', '"'].include?(a[1][0])
+            eval "ENV['#{a[0]}']='#{a[1] || ''}'"
+            success+=1
+          end
+        end
+        success
       end
     end
   end

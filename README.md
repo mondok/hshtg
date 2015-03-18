@@ -94,7 +94,7 @@ To run the unit tests, run:
 bundle exec rspec spec
 ```
 
-To run the integration tests, run:
+To run the integration tests, run (requires having your .env setup):
 ```
 bundle exec rspec spec/integration_spec.rb
 ```

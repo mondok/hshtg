@@ -10,9 +10,15 @@ require 'FileUtils'
 RSpec.describe Hshtg, '#signal_integrations' do
 
   context 'server for signaling' do
-    def subprocess
-      Process.respond_to?(:fork) ? fork : spawn
+
+    def subprocess(&block)
+      if Process.respond_to?(:fork)
+        fork { block.call }
+      else
+        spawn { block.call }
+      end
     end
+
     it 'can be quit process with QUIT signal' do
       tmp_file = 'signal.tmp'
 
