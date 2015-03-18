@@ -10,6 +10,9 @@ require 'FileUtils'
 RSpec.describe Hshtg, '#signal_integrations' do
 
   context 'server for signaling' do
+    def subprocess
+      Process.respond_to?(:fork) ? fork : spawn
+    end
     it 'can be quit process with QUIT signal' do
       tmp_file = 'signal.tmp'
 
@@ -18,7 +21,7 @@ RSpec.describe Hshtg, '#signal_integrations' do
       end
 
       Hshtg::Util::Utils.load_env_vars
-      pid = fork do
+      pid = subprocess do
         Hshtg::Http::ServerBootstrapper.subscribe(self)
         Hshtg::Http::ServerBootstrapper.start
       end
@@ -44,7 +47,7 @@ RSpec.describe Hshtg, '#signal_integrations' do
       end
 
       Hshtg::Util::Utils.load_env_vars
-      pid = fork do
+      pid = subprocess do
         Hshtg::Http::ServerBootstrapper.subscribe(self)
         Hshtg::Http::ServerBootstrapper.start
       end
@@ -70,7 +73,7 @@ RSpec.describe Hshtg, '#signal_integrations' do
       end
 
       Hshtg::Util::Utils.load_env_vars
-      pid = fork do
+      pid = subprocess do
         Hshtg::Http::ServerBootstrapper.subscribe(self)
         Hshtg::Http::ServerBootstrapper.start
       end
@@ -96,7 +99,7 @@ RSpec.describe Hshtg, '#signal_integrations' do
       end
 
       Hshtg::Util::Utils.load_env_vars
-      pid = fork do
+      pid = subprocess do
         Hshtg::Http::ServerBootstrapper.subscribe(self)
         Hshtg::Http::ServerBootstrapper.start
       end
