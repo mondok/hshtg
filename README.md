@@ -98,3 +98,9 @@ To run the integration tests, run (requires having your .env setup):
 ```
 bundle exec rspec spec/integration_spec.rb
 ```
+
+Also included is an experimental signaling test.  It's no prize, but it works.  
+It can be run with:
+```
+bundle exec rspec spec/signaling_integration_spec.rb
+```
