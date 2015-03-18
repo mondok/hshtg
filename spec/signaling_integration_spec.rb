@@ -1,5 +1,3 @@
-require 'FileUtils'
-
 # Public: Not particularly proud of these tests
 # Basically, we need to write to a file in order
 # to find out what trap sequence was called
@@ -40,7 +38,7 @@ RSpec.describe Hshtg, '#signal_integrations' do
         content = ''
         File.foreach(tmp_file) { |x| content << x }
         expect(content).to include('QUIT received')
-        FileUtils.rm(tmp_file)
+        File.delete(tmp_file)
       rescue Errno::ESRCH
       end
     end
@@ -66,7 +64,7 @@ RSpec.describe Hshtg, '#signal_integrations' do
         content = ''
         File.foreach(tmp_file) { |x| content << x }
         expect(content).to include('TERM received')
-        FileUtils.rm(tmp_file)
+        File.delete(tmp_file)
       rescue Errno::ESRCH
       end
     end
@@ -92,7 +90,7 @@ RSpec.describe Hshtg, '#signal_integrations' do
         content = ''
         File.foreach(tmp_file) { |x| content << x }
         expect(content).to include('INT received')
-        FileUtils.rm(tmp_file)
+        File.delete(tmp_file)
       rescue Errno::ESRCH
       end
     end
@@ -117,7 +115,7 @@ RSpec.describe Hshtg, '#signal_integrations' do
         File.foreach(tmp_file) { |x| content << x }
         expect(content).to include('HUP received')
         Process.kill('INT', pid)
-        FileUtils.rm(tmp_file)
+        File.delete(tmp_file)
       rescue Errno::ESRCH
       end
     end
