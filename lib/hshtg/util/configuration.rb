@@ -9,22 +9,22 @@ module Hshtg
       module_function
 
       # Public: Name of the consumer key in ENV
-      CONSUMER_KEY_NAME        = 'TWITTER_CONSUMER_KEY'
+      CONSUMER_KEY_NAME        = 'TWITTER_CONSUMER_KEY'.freeze
 
       # Public: Name of the consumer secret in ENV
-      CONSUMER_SECRET_NAME     = 'TWITTER_CONSUMER_SECRET'
+      CONSUMER_SECRET_NAME     = 'TWITTER_CONSUMER_SECRET'.freeze
 
       # Public: Name of the access token key in ENV
-      ACCESS_TOKEN_KEY_NAME    = 'TWITTER_ACCESS_TOKEN'
+      ACCESS_TOKEN_KEY_NAME    = 'TWITTER_ACCESS_TOKEN'.freeze
 
       # Public: Name of the access token secret in ENV
-      ACCESS_TOKEN_SECRET_NAME = 'TWITTER_ACCESS_TOKEN_SECRET'
+      ACCESS_TOKEN_SECRET_NAME = 'TWITTER_ACCESS_TOKEN_SECRET'.freeze
 
       # Public: Stream url path to read from
-      STREAM_URL               = '/1.1/statuses/sample.json'
+      STREAM_URL               = '/1.1/statuses/sample.json'.freeze
 
       # Public: Root stream url
-      SITE_URL                 ='https://stream.twitter.com'
+      SITE_URL                 ='https://stream.twitter.com'.freeze
 
       # Public: Log capture device
       #
