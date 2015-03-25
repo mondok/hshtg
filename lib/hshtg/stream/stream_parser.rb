@@ -58,7 +58,7 @@ module Hshtg
       end
 
       def alive?
-        @alive && !@reset
+        @alive
       end
 
       private

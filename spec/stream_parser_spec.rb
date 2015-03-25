@@ -19,6 +19,19 @@ RSpec.describe Hshtg::Stream::StreamParser, '#stream_parser', focus: true do
     end
   end
 
+  context 'status' do
+    it 'can not be alive if not started' do
+      handler        = Hshtg::Stream::StreamParser.new(Hshtg::Storage::InMemoryStore.new)
+      expect(handler.alive?).to be_falsey
+    end
+
+    it 'can be alive if not started' do
+      handler        = Hshtg::Stream::StreamParser.new(Hshtg::Storage::InMemoryStore.new)
+      handler.instance_variable_set(:@alive, true)
+      expect(handler.alive?).to be_truthy
+    end
+  end
+
   context 'hashtags' do
     it 'can determine if older than 60 seconds' do
       tag           = build_hashtag('test')
@@ -30,24 +43,6 @@ RSpec.describe Hshtg::Stream::StreamParser, '#stream_parser', focus: true do
       tag           = build_hashtag('test')
       tag.timestamp = Time.now - 55
       expect(tag.fresh?).to be_truthy
-    end
-
-    it 'can not be alive if not started' do
-      handler        = Hshtg::Stream::StreamParser.new(Hshtg::Storage::InMemoryStore.new)
-      expect(handler.alive?).to be_falsey
-    end
-
-    it 'can not be alive if started but reset is true' do
-      handler        = Hshtg::Stream::StreamParser.new(Hshtg::Storage::InMemoryStore.new)
-      handler.instance_variable_set(:@alive, true)
-      handler.instance_variable_set(:@reset, true)
-      expect(handler.alive?).to be_falsey
-    end
-
-    it 'can be alive if not started' do
-      handler        = Hshtg::Stream::StreamParser.new(Hshtg::Storage::InMemoryStore.new)
-      handler.instance_variable_set(:@alive, true)
-      expect(handler.alive?).to be_truthy
     end
 
     it 'can contain hash tags' do

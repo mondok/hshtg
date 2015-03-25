@@ -42,9 +42,10 @@ module Hshtg
         hash_klass     = @config[:hash_store_class]
         @stream_parser = StreamParser.new(hash_klass.new)
         @started_at    = DateTime.now
+        @watch_thread  = Thread.new { start_watchdog! }
       end
 
-      ## Public: Request the top X current hashtags.
+      # Public: Request the top X current hashtags.
       #
       # n - integer number of tags to return
       #
@@ -73,6 +74,7 @@ module Hshtg
       # returns instance of StreamController
       def stop
         logger.info('StreamController attempting to stop gracefully')
+        stop_watchdog!
         @stream_parser.shutdown!
         self
       end
@@ -84,6 +86,26 @@ module Hshtg
         logger.info('StreamController resetting stream and thread')
         @stream_parser.reset!
         self
+      end
+
+      private
+      
+      # Internal: Stops watchdog thread
+
+      # returns nothing
+      def stop_watchdog!
+        @watch_thread.exit if @watch_thread
+      end
+
+      # Internal: Watches the run thread to make sure it's still alive
+
+      # returns nothing
+      def start_watchdog!
+        while true
+          sleep 10
+          logger.info('Watchdog')
+          @stream_parser.begin_read unless @stream_parser.alive?
+        end
       end
     end
   end
