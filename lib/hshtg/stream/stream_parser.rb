@@ -30,6 +30,7 @@ module Hshtg
         @reset           = false
         @hash_store      = hash_store
         @request_builder = Http::RequestBuilder.new
+        @alive           = false
       end
 
       # Public: Opens the Twitter firehose
@@ -54,6 +55,10 @@ module Hshtg
       def shutdown!
         logger.info('Shutting down the Firehose')
         reset_stream(true)
+      end
+
+      def alive?
+        @alive && !@reset
       end
 
       private
@@ -91,6 +96,8 @@ module Hshtg
         logger.warn('Closing thread')
       rescue StandardError => e
         logger.fatal(e)
+      ensure
+        @alive = false
       end
 
       # Internal: If the current thread is alive, we want to
@@ -124,6 +131,7 @@ module Hshtg
       #
       # returns nothing
       def process_stream
+        @alive = true
         http, request = @request_builder.build_request
         http.request request do |response|
           logger.info('Firehose opened successfully')
