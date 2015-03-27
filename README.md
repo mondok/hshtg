@@ -43,13 +43,14 @@ All startup options are:
 
 ```
 Usage: ruby hshtg.rb [options]
-	-f, --file [settings.yml]	use a yaml file to load settings - if other command line values are set, they will override the file values
-	-c, --case [0]   			case sensitivity (0 or 1), 1 for sensitive which means tags will be grouped separately if they are cased differently
-	-s, --store [in-memory]  	type of backend storage for storing hashtags (in-memory or redis)
-	-t, --ttl [60]   			tags time to live before they are not counted
-    -l, --logging [console]     where to output logs (console or filename)
-	-p, --port [3000]			server port to listen on
-	-h, --help   				displays help
+	-f, --file [settings.yml]        use a yaml file to load settings - if other command line values are set, they will override the file values
+	-c, --case [0]                   case sensitivity (0 or 1), 1 for sensitive which means tags will be grouped separately if they are cased differently
+	-r, --restart [1]                automatic restart (0 or 1), 1 for restart on failure
+	-s, --store [in-memory]          type of backend storage for storing hashtags (in-memory or redis)
+	-t, --ttl [60]                   tags time to live before they are not counted
+	-l, --logging [console]          where to output logs (console or filename)
+	-p, --port [3000]                server port to listen on
+	-h, --help                       displays help
 ```
 
 Alternatively, you can also set these settings in the `settings.yml` file at the root or pass in your own yaml file.
