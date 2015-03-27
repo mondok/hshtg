@@ -26,6 +26,19 @@ module Hshtg
       # Public: Root stream url
       SITE_URL                 ='https://stream.twitter.com'.freeze
 
+      # Public: Automatically restart server
+      #
+      # returns automatic restart
+      def automatic_restart
+        @automatic_restart = true if @automatic_restart.nil?
+        @automatic_restart
+      end
+
+      # Public: Set automatic restart
+      def automatic_restart=(value)
+        @automatic_restart = value
+      end
+
       # Public: Log capture device
       #
       # returns log device
@@ -161,6 +174,7 @@ module Hshtg
       # returns array
       def to_a
         [
+            "Auto Restart: #{automatic_restart}",
             "Case Sensitivity: #{case_sensitive_matching}",
             "Hashtag TTL: #{tag_time_to_live_in_seconds}",
             "Storage Type: #{hashtag_storage_class}",

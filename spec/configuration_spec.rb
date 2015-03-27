@@ -22,6 +22,18 @@ RSpec.describe Hshtg::Util::Configuration, '#configuration', focus: true do
       expect(hash_config.is_valid?).to be_falsey
     end
 
+    it 'can be false automatic restart' do
+      value                               = false
+      hash_config.automatic_restart = value
+      expect(hash_config.automatic_restart).to eq(value)
+    end
+
+    it 'can be true automatic restart' do
+      value                               = true
+      hash_config.automatic_restart = value
+      expect(hash_config.automatic_restart).to eq(value)
+    end
+
     it 'can be false case sensitive on matching' do
       value                               = false
       hash_config.case_sensitive_matching = value

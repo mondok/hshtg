@@ -23,6 +23,7 @@ module Hshtg
       #   hash_store_class - class to use for storage
       #   tag_ttl - integer for how long extract tags should live
       #   case_sensitive - boolean specifying case sensitivity
+      #   automatic_restart - boolean specifying whether watchdog should auto restart on failure
       #
       # Examples
       #
@@ -30,19 +31,21 @@ module Hshtg
       #                         hash_store_class: Hshtg::Storage:InMemory
       #                         tag_ttl: 60
       #                         case_sensitive: false
+      #                         automatic_restart: true
       #                       )
       def initialize(opts = {})
         @config = {
-            hash_store_class: Util::Configuration.hashtag_storage_class,
-            tag_ttl:          Util::Configuration.tag_time_to_live_in_seconds,
-            case_sensitive:   Util::Configuration.case_sensitive_matching
+            hash_store_class:  Util::Configuration.hashtag_storage_class,
+            tag_ttl:           Util::Configuration.tag_time_to_live_in_seconds,
+            case_sensitive:    Util::Configuration.case_sensitive_matching,
+            automatic_restart: Util::Configuration.automatic_restart
         }.merge(opts)
 
         logger.info('StreamController initializing')
         hash_klass     = @config[:hash_store_class]
         @stream_parser = StreamParser.new(hash_klass.new)
         @started_at    = DateTime.now
-        @watch_thread  = Thread.new { start_watchdog! }
+        @watch_thread  = Thread.new { start_watchdog! } if @config[:automatic_restart]
       end
 
       # Public: Request the top X current hashtags.
@@ -89,7 +92,7 @@ module Hshtg
       end
 
       private
-      
+
       # Internal: Stops watchdog thread
 
       # returns nothing
@@ -103,7 +106,6 @@ module Hshtg
       def start_watchdog!
         while true
           sleep 10
-          logger.info('Watchdog')
           @stream_parser.begin_read unless @stream_parser.alive?
         end
       end

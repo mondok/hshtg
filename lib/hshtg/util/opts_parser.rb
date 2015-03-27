@@ -8,7 +8,7 @@ module Hshtg
         # Public: parse the ARGV options
         def options(args)
           # handle the port options and help
-          options = { port: 3000, case: false, ttl: 60, storage: Storage::InMemoryStore, log_device: STDOUT }
+          options = { port: 3000, case: false, automatic_restart: true, ttl: 60, storage: Storage::InMemoryStore, log_device: STDOUT }
           parser  = OptionParser.new do |opts|
             opts.banner = 'Usage: ruby hshtg.rb [options]'
 
@@ -27,6 +27,17 @@ module Hshtg
                 exit
               end
               options[:case] = val != 0
+            end
+
+            # Check if server should automatically restart on failure
+            opts.on('-r', '--restart [1]', 'automatic restart (0 or 1), 1 for restart on failure') do |r|
+              val = r.to_i
+              unless val.between?(0, 1)
+                puts 'Automatic restart must be 0 or 1'
+                puts opts
+                exit
+              end
+              options[:automatic_restart] = val == 1
             end
 
             # Optionally use Redis as a cache store

@@ -144,6 +144,7 @@ module Hshtg
           Util::Configuration.case_sensitive_matching     = options[:case]
           Util::Configuration.hashtag_storage_class       = options[:storage]
           Util::Configuration.log_capture_device          = options[:log_device]
+          Util::Configuration.automatic_restart           = options[:automatic_restart]
           current_config                                  = Util::Configuration.to_a
           current_config << "Port: #{options[:port]}"
           logger.info(current_config.join(', '))

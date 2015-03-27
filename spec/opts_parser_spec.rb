@@ -10,6 +10,16 @@ RSpec.describe Hshtg::Util::OptsParser, '#opts_parser', focus: true do
       options = Hshtg::Util::OptsParser.options(['--case', '0'])
       expect(options[:case]).to be_falsey
     end
+
+    it 'can enable automatic restart' do
+      options = Hshtg::Util::OptsParser.options(['-r', '1'])
+      expect(options[:automatic_restart]).to be_truthy
+    end
+    it 'can disable automatic restart' do
+      options = Hshtg::Util::OptsParser.options(['--restart', '0'])
+      expect(options[:automatic_restart]).to be_falsey
+    end
+
     it 'can change the default ttl' do
       options = Hshtg::Util::OptsParser.options(['-t', '1'])
       expect(options[:ttl]).to eq(1)

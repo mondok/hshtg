@@ -61,11 +61,12 @@ module Hshtg
       def handle_server_area
         section = @config['server']
         return unless section
-        port            = section['port']
-        @options[:port] = port if port
+        port              = section['port']
+        automatic_restart = section['automatic_restart']
+        @options[:port]   = port if port
       end
 
-      # Internal: Looks for any storage-specific settings 
+      # Internal: Looks for any storage-specific settings
       # and sets options
       #
       # returns nothing

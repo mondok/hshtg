@@ -7,6 +7,7 @@ storage:
 
 server:
   port: 999
+  automatic_restart: true
 
 logging:
   device: file.log
