@@ -17,7 +17,7 @@ RSpec.describe Hshtg, '#signal_integrations' do
       end
     end
 
-    it 'can be quit process with QUIT signal' do
+    it 'can quit process with QUIT signal' do
       tmp_file = 'signal.tmp'
 
       def notify(message)
@@ -43,7 +43,7 @@ RSpec.describe Hshtg, '#signal_integrations' do
       end
     end
 
-    it 'can be quit process with TERM signal' do
+    it 'can quit process with TERM signal' do
       tmp_file = 'signal.tmp'
 
       def notify(message)
@@ -69,7 +69,7 @@ RSpec.describe Hshtg, '#signal_integrations' do
       end
     end
 
-    it 'can be quit process with INT signal' do
+    it 'can quit process with INT signal' do
       tmp_file = 'signal.tmp'
 
       def notify(message)
@@ -95,7 +95,7 @@ RSpec.describe Hshtg, '#signal_integrations' do
       end
     end
 
-    it 'can be restart process with HUP signal' do
+    it 'can restart process with HUP signal' do
       tmp_file = 'signal.tmp'
 
       def notify(message)
